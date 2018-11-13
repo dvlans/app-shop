@@ -13,7 +13,17 @@
 
 Route::get('/', 'TestController@welcome');
 
-Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products/{id}','ProductController@show'); //Detalle del producto.
+
+Route::post('/cart','CartDetailController@store'); 
+Route::delete('/cart','CartDetailController@destroy');
+
+
+
+Route::middleware(['auth','admin'])->prefix('admin')->namespace('admin')->group(function () {
    	Route::get('/products','ProductController@index'); //Listar 
 	Route::get('/products/create','ProductController@create'); //Formulario 
 	Route::post('/products','ProductController@store'); //Registro
@@ -24,13 +34,10 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
 
 	Route::get('/products/{id}/images','ImageController@index');
 	Route::post('/products/{id}/images','ImageController@store'); //Registro
-	Route::post('/products/{id}/delete','ImageController@destroy'); //eliminar
+	Route::delete('/products/{id}/images','ImageController@destroy'); //eliminar
+	Route::get('/products/{id}/images/select/{image}','ImageController@select'); //Destacar imagen
 });
-
-Auth::routes();
-
-
-Route::get('/home', 'HomeController@index')->name('home');
+ 
 
 
-// CR = Create and Read.
+

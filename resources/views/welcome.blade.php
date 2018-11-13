@@ -2,6 +2,25 @@
 
 @section('body-class', 'landing-page')
 
+@section('styles')
+    <style>
+        .team .row .col-md-4{
+            margin-bottom: 5em;
+        }
+        .row {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display:         flex;
+          flex-wrap: wrap;
+        }
+        .row > [class*='col-'] {
+          display: flex;
+          flex-direction: column;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="header header-filter" style="background-image: url('{{ asset('/img/stgo.jpg') }}');">
     <div class="container">
@@ -23,8 +42,8 @@
         <div class="section text-center section-landing">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <h2 class="title">Let's talk product</h2>
-                    <h5 class="description">This is the paragraph where you can write more details about your product. Keep you user engaged by providing meaningful information. Remember that by this time, the user is curious, otherwise he wouldn't scroll to get here. Add a button if you want the user to see more.</h5>
+                    <h2 class="title">Nuestro Objetivo</h2>
+                    <h5 class="description">SyntDev es una pequeña empresa encargada de dar soluciones rápidas a sus clientes de manera eficaz, utilizando tecnología de punta para poder solucionar las problematicas de sus usuarios, resguardando su información y optimizando sus procesos para aumentar la demanda de nuestros usuarios.</h5>
                 </div>
             </div>
 
@@ -33,7 +52,7 @@
                     <div class="col-md-4">
                         <div class="info">
                             <div class="icon icon-primary">
-                                <i class="material-icons">chat</i>
+                                <i class="material-icons">forum</i>
                             </div>
                             <h4 class="info-title">First Feature</h4>
                             <p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
@@ -69,17 +88,20 @@
                     @foreach ($products as $product)
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="{{ $product->images()->first()->image }}" alt="Thumbnail Image" class="img-raised img-circle">
-                            <h4 class="title">{{ $product->name }}<br />
-                                <small class="text-muted">{{ $product->category->name }}</small>
+                            <img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised img-circle">
+                            <h4 class="title">
+                                <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a>
+                                <br/>
+                                <small class="text-muted">{{ $product->category ? $product->category->name : 'General' }}</small>
                             </h4>
                             <p class="description">{{ $product->description }}</p>
-                            <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>
-                            <a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-instagram"></i></a>
-                            <a href="#pablo" class="btn btn-simple btn-just-icon btn-default"><i class="fa fa-facebook-square"></i></a>
+                            
                         </div>
                     </div>
                     @endforeach
+                </div>
+                <div>
+                    {{ $products->links()}}
                 </div>
             </div>
 
