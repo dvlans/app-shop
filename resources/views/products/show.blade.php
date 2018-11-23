@@ -4,13 +4,24 @@
 
 @section('body-class', 'profile-page')
 
+@section('styles')
+    <style>
+        .alert {
+           width:700px;    
+        }
+    </style>
+@endsection
+
 @section('content')
+
+
 
 <div class="header header-filter" style="background-image: url('/img/examples/city.jpg');"></div>
 
 <div class="main main-raised">
     <div class="profile-content">
         <div class="container">
+
             <div class="row">
                 <div class="profile">
                     <div class="avatar">
@@ -20,6 +31,20 @@
                         <h3 class="title">{{ $product->name }}</h3>
                         <h6>{{ $product->category->name }}</h6>
                     </div>
+                    @if (session('notification'))
+                        <div class="alert alert-success center-block" role="alert">
+                            <div class="container-fluid">
+                              <div class="alert-icon">
+                                <i class="material-icons">check</i>
+                              </div>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                              </button>
+                              <b>Producto agregado:</b> {{ session('notification') }} 
+                                <a href="{{ url('/home') }}" class="alert-link"> <br>Ver carrito de compras</a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="description text-center">

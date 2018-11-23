@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <a href="http://www.creative-tim.com">
-                        Desarrollado por SyntDev®
+                        Desarrollado por DvLans®
                     </a>
                 </li>
                 <li>
@@ -25,7 +25,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            &copy; 2018, creado con <i class="fa fa-heart heart"></i> por <a href="#" target="_blank">SyntDev®</a>
+            &copy; 2018, creado con <i class="fa fa-heart heart"></i> por <a href="https://www.dvlans.com" target="_blank">DvLans®</a>
         </div>
     </div>
 </footer>

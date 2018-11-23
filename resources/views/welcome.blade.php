@@ -22,14 +22,14 @@
 @endsection
 
 @section('content')
-<div class="header header-filter" style="background-image: url('{{ asset('/img/stgo.jpg') }}');">
+<div class="header header-filter" style="background-image: url('{{ asset('/img/fondoverde.png') }}');">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h1 class="title">Bienvenido a SyntDev.</h1>
+            <div class="col-md-4">
+                <h1 class="title">Bienvenido a Vive Vivero.</h1>
                 <h4>¿Quieres saber como trabajamos?</h4>
                 <br />
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-danger btn-raised btn-lg">
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="btn btn-success btn-raised btn-lg">
                     <i class="fa fa-play"></i> Mira acá
                 </a>
             </div>
@@ -88,7 +88,7 @@
                     @foreach ($products as $product)
                     <div class="col-md-4">
                         <div class="team-player">
-                            <img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised img-circle">
+                            <a href="{{ url('/products/'.$product->id) }}"><img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised img-circle"></a>
                             <h4 class="title">
                                 <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a>
                                 <br/>

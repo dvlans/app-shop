@@ -21,6 +21,8 @@ Route::get('/products/{id}','ProductController@show'); //Detalle del producto.
 Route::post('/cart','CartDetailController@store'); 
 Route::delete('/cart','CartDetailController@destroy');
 
+Route::post('/order', 'CartController@update');
+
 
 
 Route::middleware(['auth','admin'])->prefix('admin')->namespace('admin')->group(function () {
