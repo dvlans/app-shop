@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\User;
+use App\Mail\NewEmailContact;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -24,5 +28,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function message(Request $request){
+        $name = $request->name;
+        $email = $request->email;
+        $message = $request->message;
+
+        $admins = User::where('admin', true)->get();
+        Mail::to($admins)->send(new NewEmailContact($name, $email, $message));
+
+        return back();
     }
 }

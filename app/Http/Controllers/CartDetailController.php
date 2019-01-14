@@ -7,16 +7,24 @@ use App\CartDetail;
 
 class CartDetailController extends Controller
 {
-    public function store(Request $request){
-    	$cartDetail = new CartDetail();
-    	$cartDetail->cart_id = auth()->user()->cart->id;
-    	$cartDetail->product_id = $request->product_id;
-    	$cartDetail->quantity = $request->quantity;
-    	$cartDetail->save();
+    public function store(Request $request){        
+        if(auth()->user()){
 
-        $notification = 'El producto se ha cargado correctamente a tu carrito de compras.';
-    	return back()->with(compact('notification'));
+        	$cartDetail = new CartDetail();
+        	$cartDetail->cart_id = auth()->user()->cart->id;
+        	$cartDetail->product_id = $request->product_id;
+        	$cartDetail->quantity = $request->quantity;
+        	$cartDetail->save();
 
+            $notificationHead = "Sistema:";
+            $notification = 'El producto se ha cargado correctamente a tu carrito de compras.';
+
+        	return back()->with(compact('notification'));
+        }else{
+            $notificationHead = 'Sistema:';
+            $notificationFail = 'El producto no se puede agregar al carrito, debe iniciar sesión';
+            return back()->with(compact('notificationFail','notificationHead'));
+        }
     }
 
 

@@ -15,6 +15,8 @@ class Product extends Model
     	return $this->hasMany(ProductImage::class);
     }
 
+    protected $fillable = ['name', 'description', 'price', 'category', 'long_description'];
+
 
     public function getFeaturedImageUrlAttribute(){
     	$featuredImage = $this->images()->where('featured', true)->first();
@@ -28,5 +30,24 @@ class Product extends Model
     	//default
 
     	return '/images/products/default.png';
+    }
+
+
+    public function getCategoryNameAttribute(){
+        if ($this->category) {
+            return $this->category->name;
+        }else{
+            return 'General';
+        }
+
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($product) { // before delete() method call this
+             $product->images()->delete();
+             // do the rest of the cleanup...
+        });
     }
 }

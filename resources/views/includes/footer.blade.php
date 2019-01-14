@@ -3,29 +3,32 @@
         <nav class="pull-left">
             <ul>
                 <li>
-                    <a href="http://www.creative-tim.com">
+                    <a href="https://www.dvlans.com" target="_blank">
                         Desarrollado por DvLans®
                     </a>
                 </li>
                 <li>
-                    <a href="http://presentation.creative-tim.com">
+                    <a href="#" target="_blank">
                        Sobre nosotros
                     </a>
                 </li>
                 <li>
-                    <a href="http://blog.creative-tim.com">
-                       Blog
+                    <a href="https://www.dvlans.com/portafolio/" target="_blank">
+                       Portafolio
                     </a>
                 </li>
                 <li>
-                    <a href="http://www.creative-tim.com/license">
+                    <a href="#" target="_blank">
                         Licencias
                     </a>
                 </li>
+                <a href="https://twitter.com/vivevivero_cl" target="_blank" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.instagram.com/vivevivero/?hl=es-la" target="_blank" class="btn btn-simple btn-just-icon"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.facebook.com/vivevivero/" target="_blank" class="btn btn-simple btn-just-icon btn-default"><i class="fa fa-facebook-square"></i></a>
             </ul>
         </nav>
         <div class="copyright pull-right">
-            &copy; 2018, creado con <i class="fa fa-heart heart"></i> por <a href="https://www.dvlans.com" target="_blank">DvLans®</a>
+            &copy; 2019, creado con <i class="fa fa-heart heart"></i> por <a href="https://www.dvlans.com" target="_blank">DvLans®</a>
         </div>
     </div>
 </footer>

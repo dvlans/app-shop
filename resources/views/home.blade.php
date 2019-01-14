@@ -34,20 +34,39 @@
                     </div>
                 </div>
             @endif
+            @if (session('notificationFail'))
+                        <div class="alert alert-warning center-block" role="alert">
+                            <div class="container-fluid">
+                              <div class="alert-icon">
+                                <i class="material-icons">error_outline</i>
+                              </div>
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                              </button>
+                              
+                                <div class="text-center">
+                                    <b>{{ session('notificationHead') }}</b> {{ session('notificationFail') }} <br>
+                              <a href="{{ url('/') }}" class="btn btn-info btn-round center-block btn-sm" style='width:130px; height:25px' >
+                                    <i class="material-icons">home</i> Ir al inicio
+                                </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
 
             <ul class="nav nav-pills nav-pills-primary" role="tablist">
                 <li>
                     <a href="#dashboard" role="tab" data-toggle="tab">
-                        <i class="material-icons">dashboard</i>
+                        <i class="material-icons">shopping_cart</i>
                         Carrito de compras
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="#tasks" role="tab" data-toggle="tab">
-                        <i class="material-icons">list</i>
+                        <i class="material-icons">view_list</i>
                         Pedidos realizados
                     </a>
-                </li>
+                </li>-->
             </ul>
             <hr>
             <p> Tu carrito de compras presenta {{ auth()->user()->cart->details->count() }} productos</p>
@@ -94,11 +113,12 @@
                     @endforeach
                 </tbody>
             </table>
+            <p><strong>Total a pagar:</strong> {{ auth()->user()->cart->total }}</p>
             <div class="text-center">
                 <form method="post" action="{{ url('/order') }}">
                     {{ csrf_field() }}
                     <button class="btn btn-primary btn-round">
-                        <i class="material-icons">done  </i> Realizar pedido
+                        <i class="material-icons">done</i> Realizar pedido
                     </button>  
                 </form>  
             </div>

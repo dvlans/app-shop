@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
+use App\ProductImage;
 
 class ProductController extends Controller
 {
@@ -15,8 +17,9 @@ class ProductController extends Controller
     }
 
     public function create(){
-    	$products = Product::all();
-    	return view('admin.products.create'); //formulario de registro
+
+    	$categories = Category::orderBy('name')->get();
+    	return view('admin.products.create')->with(compact('categories')); //formulario de registro
     }
 
     public function store(Request $request){
@@ -48,6 +51,7 @@ class ProductController extends Controller
     	$product->description = $request->input('description');
     	$product->long_description = $request->input('long_description');
     	$product->price = $request->input('price');
+        $product->category_id = $request->category_id;  
     	$product->save(); //INSERT
 
     	return redirect('/admin/products');
@@ -56,8 +60,9 @@ class ProductController extends Controller
 
     public function edit($id){
     	//return "Mostrando dato de prueba $id";
+        $categories = Category::orderBy('name')->get();
     	$product = Product::find($id);
-    	return view('admin.products.edit')->with(compact('product')); //formulario de registro
+    	return view('admin.products.edit')->with(compact('product','categories')); //formulario de registro
     }
 
     public function update(Request $request, $id){
@@ -88,6 +93,7 @@ class ProductController extends Controller
     	$product->description = $request->input('description');
     	$product->long_description = $request->input('long_description');
     	$product->price = $request->input('price');
+        $product->category_id = $request->category_id;  
     	$product->save(); //UPDATE
 
     	return redirect('/admin/products');
@@ -96,6 +102,8 @@ class ProductController extends Controller
 
     public function destroy($id){
     	$product = Product::find($id);
+        $productImage = ProductImage::find($id);
+        $productImage->delete();
     	$product->delete(); //DELETE
 
     	return back();

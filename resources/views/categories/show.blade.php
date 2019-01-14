@@ -9,6 +9,20 @@
         .alert {
            width:700px;    
         }
+        .team{
+            padding-bottom: 50px;
+        }
+        .team .row .col-md-4{
+            margin-bottom: 5em;
+        }
+        .row {
+          
+          flex-wrap: wrap;
+        }
+        .row > [class*='col-'] {
+          display: flex;
+          flex-direction: column;
+        }
     </style>
 @endsection
 
@@ -25,12 +39,12 @@
             <div class="row">
                 <div class="profile">
                     <div class="avatar">
-                        <img src="{{ $product->featured_image_url }}" alt="Circle Image" class="img-circle img-responsive img-raised">
+                        <img src="{{ $category->featured_image_url }}" alt="imagen representativa de la categoria {{ $category->name }}" class="img-circle img-responsive img-raised">
                     </div>
                     <div class="name">
-                        <h3 class="title">{{ $product->name }}</h3>
-                        <h6>{{ $product->category->name }}</h6>
+                        <h3 class="title">{{ $category->name }}</h3>
                     </div>
+
                     @if ($errors->any())
                         <div class="alert alert-danger center-block">
                             <ul>
@@ -71,39 +85,28 @@
                 </div>
             </div>
             <div class="description text-center">
-                <p>{{ $product->long_description }}</p>
+                <p>{{ $category->description }}</p>
             </div>
-            <div class="text-center">
-                <button class="btn btn-info btn-round" data-toggle="modal" data-target="#modalAddToCart">
-                    <i class="material-icons">add</i> Añadir al carrito de compras
-                </button>    
-            </div>
-
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="profile-tabs">
-                        <div class="nav-align-center">
-
-
-                            <div class="tab-content gallery">
-                                <div class="tab-pane active" id="studio">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            @foreach ($imagesLeft as $image)
-                                            <img src="{{ $image->url }}" class="img-rounded" />
-                                            @endforeach
-                                        </div>
-                                        <div class="col-md-6">
-                                            @foreach ($imagesRight as $image)
-                                            <img src="{{ $image->url }}" class="img-rounded" />
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            
+            <div class="team text-center">
+                <div class="row">
+                    @foreach ($products as $product)
+                    <div class="col-md-4">
+                        <div class="team-player">
+                            <a href="{{ url('/products/'.$product->id) }}"><img src="{{ $product->featured_image_url }}" alt="Thumbnail Image" class="img-raised img-circle"></a>
+                            <h4 class="title">
+                                <a href="{{ url('/products/'.$product->id) }}">{{ $product->name }}</a>
+                                
+                                
+                            </h4>
+                            <p class="description">{{ $product->description }}</p>
+                            
                         </div>
                     </div>
-                    <!-- End Profile Tabs -->
+                    @endforeach
+                </div>
+                <div>
+                    {{ $products->links()}}
                 </div>
             </div>
 

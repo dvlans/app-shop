@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>@yield('tittle', 'Vive Vivero | Plantas de todo el mundo')</title>
+    <title>@yield('title', 'Vive Vivero | Plantas de todo el mundo')</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -22,7 +22,7 @@
 </head>
 
 <body class="@yield('body-class')">
-    <nav class="navbar navbar-transparent navbar-absolute">
+    <nav class="navbar navbar-transparent  navbar-fixed-top navbar-color-on-scroll navbar-success">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -39,32 +39,42 @@
                 <ul class="nav navbar-nav navbar-right">
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Ingresar') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">
+                            <i class="material-icons">input</i>
+                            {{ __('Ingresar') }}</a>
                         </li>
                         <li class="nav-item">
                             @if (Route::has('register'))
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">
+                                <i class="material-icons">description</i>
+                                {{ __('Registro') }}</a>
                             @endif
                         </li>
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                               <i class="material-icons">person</i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li class="active">
-                                    <a href="{{ url('/home') }}">Dashboard</a>
+                                <li class="active"> 
+                                    <a href="{{ url('/home') }}"><i class="material-icons">dashboard</i> Dashboard</a>
                                 </li>
                                 @if (auth()->user()->admin)
+                                <li> 
+                                    <a href="{{ url('/admin/products') }}">
+                                    <i class="material-icons">collections</i> Gestionar productos</a>
+                                </li>
                                 <li>
-                                    <a href="{{ url('/admin/products') }}">Gestionar productos</a>
+                                    <a href="{{ url('/admin/categories') }}">
+                                    <i class="material-icons">library_books</i> Gestionar categorías</a>
                                 </li>
                                 @endif 
                                 <li>
                                     <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                                    {{ __('Cerrar sesión') }}
+                                                    
+                                    <i class="material-icons">power_settings_new</i> {{ __('Cerrar sesión') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                       @csrf
@@ -123,4 +133,5 @@
 
     <!-- Control Center for Material Kit: activating the ripples, parallax effects, scripts from the example pages etc -->
     <script src="{{ asset('/js/material-kit.js') }}" type="text/javascript"></script>
+    @yield('scripts')
 </html>
